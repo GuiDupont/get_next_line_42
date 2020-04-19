@@ -2,18 +2,21 @@
 
 void	ft_double_bzero(char *buffer, char *buffer2, int size, int size2)
 {
+	if (!buffer)
+		return ;
 	while (size--)
 	{
 		((char *)buffer)[size] = '\0';
 	}
+	if (!buffer2)
+		return ;
 	while (size2--)
 	{
 		((char *)buffer2)[size2] = '\0';
 	}
 }
 
-
-int c_is_in_str(char *str, char c)
+int char_is_in_str(char *str, char c)
 {
 	int i;
 
@@ -42,7 +45,7 @@ int put_buff_in_line(int fd, char *buff, char **line, char *previous_buff)
 			if (!(increase_line_size(line, ft_strlen_char(buff, '\n'))))
 				return (-1);
 			ft_strcat_char(*line, buff, '\n');
-			if (c_is_in_str(buff, '\n') >= 0)
+			if (char_is_in_str(buff, '\n') >= 0)
 			{
 				ft_strcpy_char(previous_buff, buff, '\0');
 				update_previous_buffer(previous_buff);
@@ -55,14 +58,9 @@ int put_buff_in_line(int fd, char *buff, char **line, char *previous_buff)
 	}
 }
 
-int	get_next_line(int fd, char **line)
+int fill_line(int fd, char *buff, char *previous_buff, char **line)
 {
-	char buff[BUFFER_SIZE + 1];
-	static char previous_buff[BUFFER_SIZE + 1];
-
-	*line = malloc(sizeof(**line));
-	ft_double_bzero(&buff[0], *line, BUFFER_SIZE + 1, 1);
-	if (c_is_in_str(previous_buff, '\n') >= 0)
+	if (char_is_in_str(previous_buff, '\n') >= 0)
 	{
 		if (!(increase_line_size(line, ft_strlen_char(previous_buff, '\n'))))
 			return (-1);
@@ -80,21 +78,38 @@ int	get_next_line(int fd, char **line)
 	return (-1);
 }
 
+int	get_next_line(int fd, char **line)
+{
+	char 		buff[BUFFER_SIZE + 1];
+	static char previous_buff[BUFFER_SIZE + 1];
+
+	if (line == NULL || fd == -1)
+		return (-1);
+	if (!(*line = malloc(sizeof(char))))
+		return (-1);
+	ft_double_bzero(&buff[0], *line, BUFFER_SIZE + 1, 1);
+	return fill_line(fd, &buff[0], &previous_buff[0], line);
+}
+
 int main ()
 {
 	char *line;
 	int fd;
 	int result;
 
-	line = NULL;
-	fd = open("test2.txt", O_RDONLY);
+	fd = open("test.txt", O_RDONLY);
 	if (fd != -1)
 	{
 		while (1)
 		{
 			result = get_next_line(fd, &line);
-			printf("ligne = -%s-\n", line);
-			free(line);
+			if (result != -1)
+				printf("ligne = -%s-\n", line);
+			if (line)
+			{
+				free(line);
+				line = NULL;
+			}
 			if (result == -1 || !result)
 				break;
 		}

@@ -34,22 +34,18 @@ char	*ft_strcpy_char(char *dest, char *src, char c)
 
 	i = 0;
 	while (src[i] && src[i] != c)
-		{
-			dest[i] = src[i];
-			i++;
-		}
-	while (dest[i])
 	{
-		dest[i] = '\0';
+		dest[i] = src[i];
 		i++;
 	}
+	dest[i] = '\0';
 	return (dest);
 }
 
 int increase_line_size(char **line, int size_sup)
 {
-	char *new;
-	int line_len;
+	char 	*new;
+	int 	line_len;
 
 	if (!size_sup)
 		return (1);
