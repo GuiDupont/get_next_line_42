@@ -87,7 +87,7 @@ int main ()
 	int result;
 
 	line = NULL;
-	fd = open("link.txt", O_RDONLY);
+	fd = open("test2.txt", O_RDONLY);
 	if (fd != -1)
 	{
 		while (1)
