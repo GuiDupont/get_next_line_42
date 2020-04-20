@@ -1,18 +1,12 @@
 #include "get_next_line.h"
 
-void	ft_double_bzero(char *buffer, char *buffer2, int size, int size2)
+void	ft_bzero(char *buffer, int size)
 {
 	if (!buffer)
 		return ;
 	while (size--)
 	{
 		((char *)buffer)[size] = '\0';
-	}
-	if (!buffer2)
-		return ;
-	while (size2--)
-	{
-		((char *)buffer2)[size2] = '\0';
 	}
 }
 
@@ -30,24 +24,23 @@ int char_is_in_str(char *str, char c)
 	return (-1);
 }
 
-int put_buff_in_line(int fd, char *buff, char **line, char *previous_buff)
+int put_buff_in_line(int fd, char *previous_buff, char **line)
 {
 	int read_return;
 
 	while (1)
 	{
-		ft_double_bzero(buff, buff, BUFFER_SIZE + 1, BUFFER_SIZE + 1);
-		read_return = read(fd, buff, BUFFER_SIZE);
+		ft_bzero(previous_buff, BUFFER_SIZE + 1);  // to delete
+		read_return = read(fd, previous_buff, BUFFER_SIZE);
 		if (read_return == -1)
 			return (-1);
 		else
 		{
-			if (!(increase_line_size(line, ft_strlen_char(buff, '\n'))))
+			if (!(increase_line_size(line, ft_strlen_char(previous_buff, '\n'))))
 				return (-1);
-			ft_strcat_char(*line, buff, '\n');
-			if (char_is_in_str(buff, '\n') >= 0)
+			ft_strcat_char(*line, previous_buff, '\n');
+			if (char_is_in_str(previous_buff, '\n') >= 0)
 			{
-				ft_strcpy_char(previous_buff, buff, '\0');
 				update_previous_buffer(previous_buff);
 				if (read_return)
 					return (1);
@@ -58,7 +51,7 @@ int put_buff_in_line(int fd, char *buff, char **line, char *previous_buff)
 	}
 }
 
-int fill_line(int fd, char *buff, char *previous_buff, char **line)
+int fill_line(int fd, char *previous_buff, char **line)
 {
 	if (char_is_in_str(previous_buff, '\n') >= 0)
 	{
@@ -73,22 +66,21 @@ int fill_line(int fd, char *buff, char *previous_buff, char **line)
 		if (!(increase_line_size(line, ft_strlen_char(previous_buff, '\0'))))
 			return (-1);
 		ft_strcpy_char(*line, previous_buff, '\0');
-		return (put_buff_in_line(fd, buff, line, previous_buff));
+		return (put_buff_in_line(fd, previous_buff, line));
 	}
 	return (-1);
 }
 
 int	get_next_line(int fd, char **line)
 {
-	char 		buff[BUFFER_SIZE + 1];
 	static char previous_buff[BUFFER_SIZE + 1];
 
 	if (line == NULL || fd == -1)
 		return (-1);
 	if (!(*line = malloc(sizeof(char))))
 		return (-1);
-	ft_double_bzero(&buff[0], *line, BUFFER_SIZE + 1, 1);
-	return fill_line(fd, &buff[0], &previous_buff[0], line);
+	ft_bzero(*line, 1);
+	return fill_line(fd, &previous_buff[0], line);
 }
 
 int main ()
