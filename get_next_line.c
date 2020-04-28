@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/28 11:24:03 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 21:17:20 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 23:39:36 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ int		fill_line(int fd, char *buff, char **line)
 			return (-1);
 		ft_strcpy_char(*line, buff, '\n');
 		update_previous_buffer(buff);
-		if (!buff[0])
-			return (0);
 		return (1);
 	}
 	else
