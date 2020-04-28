@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/28 11:24:03 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 11:54:27 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 12:04:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int		put_buff_in_line(int fd, char *buff, char **line)
 				if (read_return)
 					return (1);
 			}
-		if (!read_return)
-			return (0);
+			if (!read_return)
+				return (0);
 		}
 	}
 }

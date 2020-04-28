@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/28 12:02:28 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 12:02:30 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 12:08:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ char	*ft_strcpy_char(char *dest, char *src, char c)
 	return (dest);
 }
 
-int increase_line_size(char **line, int size_sup)
+int		increase_line_size(char **line, int size_sup)
 {
-	char 	*new;
-	int 	line_len;
+	char	*new;
+	int		line_len;
 
 	if (!size_sup)
 		return (1);
@@ -71,14 +71,14 @@ int increase_line_size(char **line, int size_sup)
 	return (1);
 }
 
-void update_previous_buffer(char *str)
+void	update_previous_buffer(char *str)
 {
 	int i;
 
 	i = 0;
 	if (str[0] == '\0')
 		return ;
-	while(str[i] != '\n')
+	while (str[i] != '\n')
 		i++;
 	i++;
 	ft_strcpy_char(str, &str[i], '\0');
