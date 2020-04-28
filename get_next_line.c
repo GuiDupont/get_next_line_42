@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/28 11:24:03 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 17:50:18 by gdupont          ###   ########.fr       */
+/*   Updated: 2020/04/28 20:07:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int		fill_line(int fd, char *buff, char **line)
 			return (-1);
 		ft_strcpy_char(*line, buff, '\n');
 		update_previous_buffer(buff);
+		if (!buff[0])
+			return (0);
 		return (1);
 	}
 	else
@@ -88,7 +90,7 @@ int		get_next_line(int fd, char **line)
 	static char buff[100][BUFFER_SIZE + 1];
 
 	if(!line || BUFFER_SIZE <= 0)
-	  return (-1);
+		return (-1);
 	if (fd < 0 || fd >= 100 || BUFFER_SIZE > 100000000)
 	{
 		*line = NULL;
