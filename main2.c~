@@ -22,7 +22,7 @@ int main ()
 			if (result <= 0 )
 				break;
 		}
-	
+	}
 	close (fd);
 	return (0);
 }
