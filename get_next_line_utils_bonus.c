@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/28 12:02:12 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 12:12:13 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 12:12:57 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ char	*ft_strcpy_char(char *dest, char *src, char c)
 
 int		increase_line_size(char **line, int size_sup)
 {
-	char 	*new;
-	int 	line_len;
+	char	*new;
+	int		line_len;
 
 	if (!size_sup)
 		return (1);
