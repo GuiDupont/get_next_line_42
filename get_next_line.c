@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/28 11:24:03 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 20:07:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 21:17:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		get_next_line(int fd, char **line)
 {
 	static char buff[100][BUFFER_SIZE + 1];
 
-	if(!line || BUFFER_SIZE <= 0)
+	if (!line || BUFFER_SIZE <= 0)
 		return (-1);
 	if (fd < 0 || fd >= 100 || BUFFER_SIZE > 100000000)
 	{
