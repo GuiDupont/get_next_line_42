@@ -6,12 +6,12 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/28 12:24:10 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 12:24:12 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 12:26:38 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE__BONUS_H
 
 # include <unistd.h>
 # include <stdio.h>
