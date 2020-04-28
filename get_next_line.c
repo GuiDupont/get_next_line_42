@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/28 11:24:03 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 12:04:28 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 17:28:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int		put_buff_in_line(int fd, char *buff, char **line)
 	{
 		ft_bzero(buff, BUFFER_SIZE + 1);
 		read_return = read(fd, buff, BUFFER_SIZE);
-		if (read_return == -1)
+		printf("read_return = %d\n", read_return);
+		if (read_return < 0)
 			return (-1);
 		else
 		{
@@ -57,13 +58,13 @@ int		put_buff_in_line(int fd, char *buff, char **line)
 				if (read_return)
 					return (1);
 			}
-			if (!read_return)
+			if (read_return == 0)
 				return (0);
 		}
 	}
 }
 
-int		all_line(int fd, char *buff, char **line)
+int		fill_line(int fd, char *buff, char **line)
 {
 	if (char_is_in_str(buff, '\n') >= 0)
 	{
@@ -85,10 +86,14 @@ int		all_line(int fd, char *buff, char **line)
 
 int		get_next_line(int fd, char **line)
 {
-	static char buff[15][BUFFER_SIZE + 1];
+	static char buff[200][BUFFER_SIZE + 1];
 
-	if (line == NULL || fd == -1 || fd >= 15 || BUFFER_SIZE > 100000000)
+
+	if (fd < 0 || fd >= 200 || BUFSIZ > 100000000)
+	{
+		*line = NULL;
 		return (-1);
+	}
 	if (!(*line = malloc(sizeof(char))))
 		return (-1);
 	ft_bzero(*line, 1);
