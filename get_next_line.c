@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/04/28 11:24:03 by user42            #+#    #+#             */
+/*   Updated: 2020/04/28 11:54:27 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 void	ft_bzero(char *buffer, int size)
@@ -10,7 +22,7 @@ void	ft_bzero(char *buffer, int size)
 	}
 }
 
-int char_is_in_str(char *str, char c)
+int		char_is_in_str(char *str, char c)
 {
 	int i;
 
@@ -24,13 +36,13 @@ int char_is_in_str(char *str, char c)
 	return (-1);
 }
 
-int put_buff_in_line(int fd, char *buff, char **line)
+int		put_buff_in_line(int fd, char *buff, char **line)
 {
 	int read_return;
 
 	while (1)
 	{
-		ft_bzero(buff, BUFFER_SIZE + 1);  // to delete
+		ft_bzero(buff, BUFFER_SIZE + 1);
 		read_return = read(fd, buff, BUFFER_SIZE);
 		if (read_return == -1)
 			return (-1);
@@ -51,7 +63,7 @@ int put_buff_in_line(int fd, char *buff, char **line)
 	}
 }
 
-int fill_line(int fd, char *buff, char **line)
+int		all_line(int fd, char *buff, char **line)
 {
 	if (char_is_in_str(buff, '\n') >= 0)
 	{
@@ -71,7 +83,7 @@ int fill_line(int fd, char *buff, char **line)
 	return (-1);
 }
 
-int	get_next_line(int fd, char **line)
+int		get_next_line(int fd, char **line)
 {
 	static char buff[15][BUFFER_SIZE + 1];
 
@@ -80,5 +92,5 @@ int	get_next_line(int fd, char **line)
 	if (!(*line = malloc(sizeof(char))))
 		return (-1);
 	ft_bzero(*line, 1);
-	return fill_line(fd, &buff[fd][0], line);
+	return (fill_line(fd, &buff[fd][0], line));
 }
