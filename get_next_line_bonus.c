@@ -85,10 +85,15 @@ int		fill_line(int fd, char *buff, char **line)
 
 int		get_next_line(int fd, char **line)
 {
-	static char buff[15][BUFFER_SIZE + 1];
+	static char buff[100][BUFFER_SIZE + 1];
 
-	if (line == NULL || fd == -1 || fd >= 15 || BUFFER_SIZE > 100000000)
-		return (-1);
+	if (!line || BUFFER_SIZE <= 0)
+	  return (-1);
+	if (fd < 0 || fd >= 100 || BUFFER_SIZE > 100000000)
+	{
+	    *line = NULL;
+	    return (-1);
+	}
 	if (!(*line = malloc(sizeof(char))))
 		return (-1);
 	ft_bzero(*line, 1);

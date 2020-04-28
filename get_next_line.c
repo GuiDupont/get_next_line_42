@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/28 11:24:03 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 17:28:01 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/28 17:50:18 by gdupont          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int		put_buff_in_line(int fd, char *buff, char **line)
 	{
 		ft_bzero(buff, BUFFER_SIZE + 1);
 		read_return = read(fd, buff, BUFFER_SIZE);
-		printf("read_return = %d\n", read_return);
 		if (read_return < 0)
 			return (-1);
 		else
@@ -86,10 +85,11 @@ int		fill_line(int fd, char *buff, char **line)
 
 int		get_next_line(int fd, char **line)
 {
-	static char buff[200][BUFFER_SIZE + 1];
+	static char buff[100][BUFFER_SIZE + 1];
 
-
-	if (fd < 0 || fd >= 200 || BUFSIZ > 100000000)
+	if(!line || BUFFER_SIZE <= 0)
+	  return (-1);
+	if (fd < 0 || fd >= 100 || BUFFER_SIZE > 100000000)
 	{
 		*line = NULL;
 		return (-1);
