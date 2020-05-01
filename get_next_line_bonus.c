@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/28 12:02:04 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 21:17:38 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/01 17:13:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ int		fill_line(int fd, char *buff, char **line)
 
 int		get_next_line(int fd, char **line)
 {
-	static char buff[100][BUFFER_SIZE + 1];
+	static char buff[255][BUFFER_SIZE + 1];
 
 	if (!line || BUFFER_SIZE <= 0)
 		return (-1);
-	if (fd < 0 || fd >= 100 || BUFFER_SIZE > 100000000)
+	if (fd < 0 || fd > 255 || BUFFER_SIZE > 30000)
 	{
 		*line = NULL;
 		return (-1);

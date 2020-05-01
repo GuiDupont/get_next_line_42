@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/28 11:24:03 by user42            #+#    #+#             */
-/*   Updated: 2020/04/28 23:39:36 by user42           ###   ########.fr       */
+/*   Updated: 2020/05/01 17:14:28 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ int		fill_line(int fd, char *buff, char **line)
 
 int		get_next_line(int fd, char **line)
 {
-	static char buff[100][BUFFER_SIZE + 1];
+	static char buff[BUFFER_SIZE + 1];
 
-	if (!line || BUFFER_SIZE <= 0)
+	if (!line)
 		return (-1);
-	if (fd < 0 || fd >= 100 || BUFFER_SIZE > 100000000)
+	if (fd < 0 || fd > 256 || BUFFER_SIZE > 100000000 || BUFFER_SIZE <= 0)
 	{
 		*line = NULL;
 		return (-1);
@@ -97,5 +97,5 @@ int		get_next_line(int fd, char **line)
 	if (!(*line = malloc(sizeof(char))))
 		return (-1);
 	ft_bzero(*line, 1);
-	return (fill_line(fd, &buff[fd][0], line));
+	return (fill_line(fd, &buff[0], line));
 }
