@@ -19,7 +19,7 @@ If there is an issue it returns -1. Otherwise, 1 is returned.
 
 run the following command to compile it, you can put BUFFER_SIZE up to 100 000 000:
 
-`gcc -D BUFFER_SIZE=10 get_next_line.c get_next_line_utils.c test_gnl.c`
+`gcc -D BUFFER_SIZE=10 get_next_line.c get_next_line_utils.c main_test.c`
 
 then execute the program with one argument which is the path to file to be displayed:
 
