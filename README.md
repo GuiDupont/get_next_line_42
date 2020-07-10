@@ -6,7 +6,7 @@ Get_next_line function reads a new line from a fd at every new call. It can be p
 
 **Read buffer size**
 
-The size of the buffer used during the read function calls is not predefined and can take any value. It has to befined during compilation.
+The size of the buffer used for the read function is not predefined and can take any value >0 and < 100 000 000. It has to befined during compilation.
 
 **Return value**
 
@@ -25,4 +25,4 @@ then execute the program with one argument which is the path to file to be displ
 
 `./a.out text_files/la_marseillaise.txt`
  
- In order to test various situation, text files are stored in the text_files folder.
+ In order to test various situation, test files are stored in the text_files folder.
